@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  base:
+    container_name: gambot_card
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - '.:/src'
+    ports:
+      - 5003:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/cards_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/cards_test
+    depends_on:
+      - db
+
+  db:
+    container_name: gambot_card_db
+    build:
+      context: ./project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5436:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
