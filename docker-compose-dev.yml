@@ -2,24 +2,24 @@ version: '3.6'
 
 services:
   base:
-    container_name: gambot_card
+    container_name: git_report
     build:
       context: .
       dockerfile: Dockerfile-dev
     volumes:
       - '.:/src'
     ports:
-      - 5003:5000
+      - 5000:5000
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/cards_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/cards_test
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/gitlab_data_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/gitlab_data_test
     depends_on:
       - db
 
   db:
-    container_name: gambot_card_db
+    container_name: git_report_db
     build:
       context: ./project/db
       dockerfile: Dockerfile
