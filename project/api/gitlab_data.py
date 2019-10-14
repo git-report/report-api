@@ -10,11 +10,11 @@ from project.api.models import Issue
 
 gitlab_data_blueprint = Blueprint('gitlab_data', __name__)
 
+# regex=http+s?:\/\/.*gitlab.*\.com.*\/
+
 host = "https://gitlab.com"
 api_path = "/api/v4/projects/"
 headers = {'PRIVATE-TOKEN': 'faighHd8DEgVxBFVfxTU'}
-
-# https://gitlab.com/api/v4/projects/9363838/issues?scope=all
 # project_id = "9363838"
 # parameters = "issues?scope=all"
 
@@ -40,15 +40,10 @@ def insert_issues(issues_json):
         description = i['description']
         project_id = i['project_id']
         labels = i['labels']
-        #link = repository + "issues" + "/" + str(issue_id)
 
-        # label = Label.query.filter_by(name=name).first()
         db.session.add(Issue(issue_id=issue_id,
                             labels=labels,
                             title=title,
                             description=description,
                             project_id=project_id))
         db.session.commit()
-
-
-# regex=http+s?:\/\/.*gitlab.*\.com.*\/

@@ -17,6 +17,9 @@ class Issue(db.Model):
         self.project_id = project_id
 
 
+
+
+
 # class Label(db.Model):
 #     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 #     name = db.Column(db.String(100),  nullable=False)

@@ -22,3 +22,7 @@ htmlcov/
 .coverage.*
 *,cover
 __pycache__
+
+
+# git
+git-credential-store
