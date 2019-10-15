@@ -47,3 +47,26 @@ def insert_issues(issues_json):
                             description=description,
                             project_id=project_id))
         db.session.commit()
+
+@gitlab_data_blueprint.route("/get_labels", methods=["GET"])
+def get_labels():
+    request_url = make_request_url("9363838", "labels?with_counts=true")
+    labels = requests.get(request_url, headers=headers, verify=False)
+    labels_json = labels.json()
+    print("labels json")
+    print(labels_json)
+    # insert_labels(labels_json)
+    return jsonify(labels_json), 200
+
+def insert_labels(labels_json):
+    for i in labels_json:
+        # atributos do request
+        name = i['name']
+        
+
+        db.session.add(Issue(issue_id=issue_id,
+                            labels=labels,
+                            title=title,
+                            description=description,
+                            project_id=project_id))
+        db.session.commit()

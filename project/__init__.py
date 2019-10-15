@@ -19,8 +19,10 @@ def create_app(script_info=None):
     # register blueprints
     from project.api.gitlab_data import gitlab_data_blueprint
     from project.api.metrics import metrics_blueprint
+    from project.api.requirements import requirements_blueprint
     app.register_blueprint(gitlab_data_blueprint)
     app.register_blueprint(metrics_blueprint)
+    app.register_blueprint(requirements_blueprint)
 
     # shell context for flask cli
     @app.shell_context_processor
